@@ -1,0 +1,28 @@
+---
+description: Client Issue Tracker master context, stack, architecture, and design tokens
+alwaysApply: true
+---
+
+# Project Rules
+
+Canonical spec: [docs/MASTER_CONTEXT.md](docs/MASTER_CONTEXT.md)
+
+## Stack
+
+- Frontend: React 18, Vite, TS, React Router, TanStack Query, React Hook Form, Zod, Tailwind
+- Backend: Express, TypeScript, Prisma, PostgreSQL
+- Auth: JWT httpOnly cookie + RBAC (CLIENT | MANAGER)
+
+## Architecture
+
+Controller → Service → Repository → Prisma → PostgreSQL
+
+Never access Prisma from controllers. Business logic in services only.
+
+## Design tokens
+
+primary `#1A1247` | secondary `#FF0F7B` | accent `#00CFFF` | background `#F8F9FC` | card `#FFFFFF` | text `#111827`
+
+## Deliverables
+
+README, ARCHITECTURE, AI_WORKFLOW, PRODUCTION_READINESS, API_SPEC, DATABASE_SCHEMA, TEST_PLAN

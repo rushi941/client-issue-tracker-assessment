@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 228 33% 97%;
+    --foreground: 221 39% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 221 39% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 221 39% 11%;
+    --primary: 252 55% 18%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 334 100% 53%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 192 100% 50%;
+    --accent-foreground: 252 55% 18%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 192 100% 50%;
+    --radius: 0.625rem;
+    --sidebar-background: 252 55% 18%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 334 100% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 252 40% 28%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 252 30% 28%;
+    --sidebar-ring: 192 100% 50%;
+  }
+
+  *,
+  ::before,
+  ::after {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  @keyframes login-slide-in {
+    from {
+      opacity: 0;
+      transform: translateX(-28px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes login-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @keyframes login-glow {
+    0%,
+    100% {
+      opacity: 0.35;
+    }
+    50% {
+      opacity: 0.55;
+    }
+  }
+
+  .login-slide-in {
+    animation: login-slide-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .login-slide-in-delay-1 {
+    animation-delay: 0.12s;
+  }
+
+  .login-slide-in-delay-2 {
+    animation-delay: 0.28s;
+  }
+
+  .login-slide-in-delay-3 {
+    animation-delay: 0.44s;
+  }
+
+  .login-float {
+    animation: login-float 5s ease-in-out infinite;
+  }
+
+  .login-glow {
+    animation: login-glow 4s ease-in-out infinite;
+  }
+
+  .list-search-shell {
+    @apply relative rounded-xl border border-dashed border-border/80 bg-gradient-to-r from-background via-background to-accent/5 transition-all duration-300;
+  }
+
+  .list-search-shell:focus-within {
+    @apply border-accent/50 shadow-[0_0_0_3px_hsl(var(--accent)/0.12)] ring-1 ring-accent/20;
+  }
+
+  .list-search-icon {
+    @apply absolute left-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm;
+  }
+
+  .list-toolbar {
+    @apply border border-dashed border-border/70 bg-gradient-to-br from-card via-card to-secondary/5;
+  }
+
+  .list-filter-panel-inner {
+    @apply rounded-xl border border-dashed border-accent/20 bg-gradient-to-br from-accent/5 via-background to-secondary/5;
+  }
+
+  .list-pagination-footer {
+    @apply relative border border-dashed border-border/70;
+  }
+
+  .list-pagination-progress {
+    @apply absolute left-0 top-0 h-1 bg-gradient-to-r from-accent via-secondary to-accent transition-all duration-500 ease-out;
+  }
+}
