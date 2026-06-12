@@ -33,7 +33,7 @@ export function IssueDetailPage() {
     mutationFn: () =>
       api(`/api/issues/${id}/comments`, {
         method: "POST",
-        body: JSON.stringify({ body: comment }),
+        body: JSON.stringify({ body: comment.trim() }),
       }),
     meta: { successMessage: "Comment added" },
     onSuccess: () => {

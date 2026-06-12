@@ -24,10 +24,12 @@ import {
   formatIssueSeverity,
 } from "@/lib/labels";
 
+import { trimmedText } from "@/lib/validation";
+
 const schema = z.object({
-  title: z.string().min(3, "Title must be at least 3 characters"),
-  description: z.string().min(10, "Description must be at least 10 characters"),
-  websiteId: z.string().min(1, "Select a website"),
+  title: trimmedText(3, 200, "Title must be at least 3 characters"),
+  description: trimmedText(10, undefined, "Description must be at least 10 characters"),
+  websiteId: trimmedText(1, undefined, "Select a website"),
   category: z.enum(["BUG", "FEEDBACK", "SUGGESTION", "IMPROVEMENT"]),
   severity: z.enum(["LOW", "MEDIUM", "HIGH", "CRITICAL"]),
 });

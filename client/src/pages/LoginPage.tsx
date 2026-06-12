@@ -12,9 +12,11 @@ import { Label } from "@/components/ui/label";
 import { toastError, toastSuccess } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 
+import { trimmedEmail, nonWhitespaceOnly } from "@/lib/validation";
+
 const schema = z.object({
-  email: z.string().email("Enter a valid email"),
-  password: z.string().min(1, "Password is required"),
+  email: trimmedEmail(),
+  password: nonWhitespaceOnly(1, "Password is required"),
 });
 
 type FormData = z.infer<typeof schema>;

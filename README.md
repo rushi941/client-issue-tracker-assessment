@@ -75,6 +75,15 @@ cp .env.example server/.env
 | `CLIENT_URL` | Frontend origin for CORS (default `http://localhost:5173`) |
 | `OPENAI_API_KEY` | Optional — not required for demo |
 
+**Cloud / Docker:** `.env` is not committed to git. You must set `DATABASE_URL` and `JWT_SECRET` as environment variables in your hosting platform (Railway, Render, Fly.io, etc.). Without them the server exits on startup.
+
+```bash
+DATABASE_URL=postgresql://user:password@host:5432/ai_tracker?schema=public
+JWT_SECRET=your-long-random-secret-at-least-8-characters
+CLIENT_URL=https://your-frontend-domain.com
+NODE_ENV=production
+```
+
 ### 3. Database setup
 
 Create the database if it does not exist:

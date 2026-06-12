@@ -1,9 +1,20 @@
 node_modules/
 dist/
 build/
+*.tsbuildinfo
+.vite/
+coverage/
+
+# Secrets — never commit
 .env
-.env.local
+.env.*
+!.env.example
+server/.env
+
 *.log
 .DS_Store
+Thumbs.db
+
+# Local task / extract artifacts
 _task_docx/
 _task.zip

@@ -64,7 +64,7 @@ export function ManagerIssueDetailPage() {
     mutationFn: () =>
       api(`/api/issues/${id}/responses`, {
         method: "POST",
-        body: JSON.stringify({ body: response }),
+        body: JSON.stringify({ body: response.trim() }),
       }),
     meta: { successMessage: "Response sent" },
     onSuccess: () => {
