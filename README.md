@@ -107,6 +107,27 @@ npm run db:setup
 
 The seed creates demo users, **54 websites**, sample issues, comments, activity logs, and notifications.
 
+The seed is **idempotent** — it only loads data when the database is empty, so it is safe to run on every deploy. To wipe and reload demo data, set `FORCE_SEED=true`.
+
+### Deployment (auto-load demo data)
+
+On a hosting platform, run migrations **and** seed in one command as the release/start step:
+
+```bash
+npm run db:deploy           # prisma migrate deploy + generate + seed (idempotent)
+npm run start -w server     # start the API
+```
+
+| Platform | Where to put it |
+|----------|-----------------|
+| **Render** | Pre-Deploy Command: `npm run db:deploy` · Start Command: `npm run start -w server` |
+| **Railway** | Deploy/Start: `npm run db:deploy && npm run start -w server` |
+| **Fly.io** | `release_command = "npm run db:deploy"` in `fly.toml` |
+
+> Demo data loads automatically on the first deploy. Later deploys/restarts skip seeding (data is preserved) unless `FORCE_SEED=true`.
+>
+> Ensure your install step includes dev dependencies (default `npm install`) so the Prisma CLI and `tsx` are available for migrate + seed.
+
 ### 4. Verify (optional)
 
 ```bash

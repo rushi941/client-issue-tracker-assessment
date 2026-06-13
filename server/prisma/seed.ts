@@ -72,6 +72,21 @@ const EXTRA_WEBSITE_NAMES = [
 ];
 
 async function main() {
+  // Idempotent guard: safe to run on every deploy/restart.
+  // Seeds only when the database has no demo data. Set FORCE_SEED=true to
+  // wipe and reseed (useful for refreshing a demo environment).
+  const forceSeed = process.env.FORCE_SEED === "true";
+  const existing = await prisma.user.findUnique({
+    where: { email: "client@demo.com" },
+  });
+
+  if (existing && !forceSeed) {
+    console.log(
+      "Seed skipped: demo data already present. Set FORCE_SEED=true to wipe and reseed.",
+    );
+    return;
+  }
+
   const passwordHash = await bcrypt.hash("demo123", 10);
 
   await prisma.notification.deleteMany();
@@ -234,5 +249,8 @@ async function main() {
 }
 
 main()
-  .catch(console.error)
+  .catch((error) => {
+    console.error("Seed failed:", error);
+    process.exitCode = 1;
+  })
   .finally(() => prisma.$disconnect());
